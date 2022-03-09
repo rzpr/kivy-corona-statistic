@@ -23,25 +23,11 @@ class DemoApp(MDApp):
         screen.add_widget(self.help_str)
         return screen
 
-    def proses_cari(self):
-        try:
-            self.database ={
-                'warga': {'rezza':{'Umur': '18', 'TanggalLahir':'25/04/02', 'alamat': 'Jl.Terompetxxxxxxxx'}}
-            }
-            user = self.help_str.get_screen('search').ids.data_warga.text
-            namaa = self.database['warga'][user]['Umur']
-            lahir = self.database['warga'][user]['TanggalLahir']
-            alamat = self.database['warga'][user]['alamat']
-            user = self.help_str.get_screen('search').ids.data_warga.text
-            self.help_str.get_screen('search').ids.nama.text = str(f'Nama : {user}\nTgl-Lahir: {lahir}\nAlamat: {alamat}')
-            self.help_str.get_screen('search').ids.data_card.opacity = str(1)
-        except KeyError:
-            self.help_str.get_screen('search').ids.nama.text = str('Nama Tidak Terdaftar')
-            self.help_str.get_screen('search').ids.data_card.opacity = str(1)
     def statcor(self):
         url = 'https://api.kawalcorona.com/indonesia/'
         self.request = UrlRequest(url, on_success=self.sucescor, verify=True)
         user = self.help_str.get_screen('stat').ids.positif.text
+        
     def sucescor(self, *args):
         for data in self.request.result:
             print(data)
